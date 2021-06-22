@@ -18,6 +18,5 @@ steps:
     command: 'build'
     Dockerfile: 'docker/pylith-testenv'
     arguments: '--build-arg BASE_IMAGE=registry.gitlab.com/cig-pylith/pylith_installer/debian-stable --target build'
-    dockerfile: "docker/pylith-testenv"
     addPipelineData: false
     addBaseImageData: false
