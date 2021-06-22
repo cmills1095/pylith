@@ -1,0 +1,28 @@
+# Docker
+# Build a Docker image
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+  - main
+
+pool:
+  vmImage: "ubuntu-20.04"
+
+resources:
+  - repo: self
+
+stages:
+  - stage: Build
+    displayName: Build image
+    jobs:
+      - job: Build
+        displayName: Build
+        steps:
+          - checkout: self
+            submodules: true
+          - task: Docker@2
+            displayName: Build test image
+            inputs:
+              command: build
+              arguments: -t pylith-testenv --build-arg BASE_IMAGE=registry.gitlab.com/cig-pylith/pylith_installer/debian-stable --target build
+              dockerfile: "docker/pylith-testenv"
